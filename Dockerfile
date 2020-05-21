@@ -73,7 +73,7 @@ RUN cd && \
 #RUN apt-get -q -y install potrace
 
 # svg to image
-RUN apt-get -q -y install python3 python3-pip
+RUN apt-get -q -y install python3 python3-pip default-jdk
 RUN pip3 install cairosvg
 
 # mini size
@@ -112,3 +112,8 @@ RUN go get github.com/gorilla/websocket
 RUN go get github.com/ipipdotnet/ipdb-go
 
 VOLUME /go/build/
+
+WORKDIR /go/run
+
+COPY logo-text-svg-0.0.4.jar /go/run
+
