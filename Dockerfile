@@ -1,4 +1,4 @@
-FROM golang:1.14.2
+FROM golang:1.14.3
 
 # Ignore APT warnings about not having a TTY
 ENV DEBIAN_FRONTEND noninteractive
@@ -71,6 +71,10 @@ RUN cd && \
 
 # Install potrace to transform png to svg
 #RUN apt-get -q -y install potrace
+
+# svg to image
+RUN apt-get -q -y install python3 python3-pip
+RUN pip3 install cairosvg
 
 # mini size
 RUN apt-get clean autoclean \
