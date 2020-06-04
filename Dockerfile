@@ -111,6 +111,9 @@ RUN go get github.com/gin-gonic/gin
 RUN go get github.com/gorilla/websocket
 RUN go get github.com/ipipdotnet/ipdb-go
 RUN go get github.com/shirou/gopsutil
+RUN go get github.com/beevik/etree
+RUN go get github.com/siongui/gojianfan
+
 
 VOLUME /go/build/
 
