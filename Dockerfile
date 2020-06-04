@@ -115,5 +115,5 @@ VOLUME /go/build/
 
 WORKDIR /go/run
 
-COPY logo-text-svg-0.0.5.jar /go/run
+COPY logo-text-svg-0.0.7.jar /go/run
 
