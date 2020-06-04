@@ -11,7 +11,7 @@ RUN apt-get update && \
 RUN apt-get -q -y install libjpeg-dev libpng-dev libtiff-dev libxml2 libwebp-dev librsvg2-bin zip unzip\
     libgif-dev libx11-dev libltdl-dev libtool-bin ocl-icd-opencl-dev libfreetype6 --no-install-recommends
 
-ENV IMAGEMAGICK_VERSION=7.0.10-13
+ENV IMAGEMAGICK_VERSION=7.0.10-16
 
 ENV POTRACE_VERSION=1.16
 
@@ -107,9 +107,10 @@ RUN go get github.com/markbates/safe
 RUN go get github.com/markbates/errx
 RUN go get github.com/markbates/oncer
 
-RUN go get -u github.com/gin-gonic/gin
+RUN go get github.com/gin-gonic/gin
 RUN go get github.com/gorilla/websocket
 RUN go get github.com/ipipdotnet/ipdb-go
+RUN go get github.com/shirou/gopsutil
 
 VOLUME /go/build/
 
