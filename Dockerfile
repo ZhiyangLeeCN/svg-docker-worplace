@@ -113,6 +113,7 @@ RUN go get github.com/ipipdotnet/ipdb-go
 RUN go get github.com/shirou/gopsutil
 RUN go get github.com/beevik/etree
 RUN go get github.com/siongui/gojianfan
+RUN go get github.com/gin-contrib/pprof
 
 
 VOLUME /go/build/
