@@ -86,7 +86,7 @@ RUN cd && \
 	phpize && \
 	./configure  --enable-openssl --enable-sockets --enable-http2 --enable-mysqlnd && \
 	make && make install && \
-	echo "extension=swoole" > /etc/php/7.3/cli/conf.d/20-swoole.ini
+	echo "extension=swoole" > /etc/php/7.4/cli/conf.d/20-swoole.ini
 
 RUN cd && \
 	wget  https://downloads.sourceforge.net/potrace/potrace-${POTRACE_VERSION}.tar.gz && \
