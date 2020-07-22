@@ -1,4 +1,4 @@
-FROM golang:1.14.4
+FROM golang:1.14.5
 
 # Ignore APT warnings about not having a TTY
 ENV DEBIAN_FRONTEND noninteractive
@@ -17,6 +17,8 @@ ENV POTRACE_VERSION=1.16
 
 ENV FREETYPE_VERSION=2.10.2
 
+ENV SWOOLE_VERSION=4.5.2
+
 RUN cd && \
     wget https://nchc.dl.sourceforge.net/project/freetype/freetype2/${FREETYPE_VERSION}/freetype-${FREETYPE_VERSION}.tar.gz && \
     tar xvzf freetype-${FREETYPE_VERSION}.tar.gz && \
@@ -24,6 +26,30 @@ RUN cd && \
     ./configure && \
     make && make install && \
     ldconfig /usr/local/lib
+
+# php
+RUN apt install -q -y php php-dev php7.3-mysql php7.3-bcmath php7.3-bz2 php7.3-curl php7.3-gd php7.3-mbstring php7.3-zip
+# php protobuf
+RUN pecl install protobuf && \
+	echo "extension=protobuf" > /etc/php/7.3/cli/conf.d/20-protobuf.ini
+# php imagick
+RUN echo "" | pecl install imagick && \
+	echo "extension=imagick" > /etc/php/7.3/cli/conf.d/20-imagick.ini
+# php igbinary
+RUN echo no | pecl install igbinary && \
+	echo "extension=igbinary" > /etc/php/7.3/cli/conf.d/20-igbinary.ini
+# php redis
+RUN echo yes | pecl install redis && \
+	echo "extension=redis" > /etc/php/7.3/cli/conf.d/20-redis.ini
+# php swoole
+RUN cd && \
+	wget https://github.com/swoole/swoole-src/archive/v${SWOOLE_VERSION}.tar.gz && \
+	tar xvzf v${SWOOLE_VERSION}.tar.gz && \
+	cd swoole* && \
+	phpize && \
+	./configure  --enable-openssl --enable-sockets --enable-http2 --enable-mysqlnd && \
+	make && make install && \
+	echo "extension=swoole" > /etc/php/7.3/cli/conf.d/20-swoole.ini
 
 RUN cd && \
 	wget https://github.com/ImageMagick/ImageMagick/archive/${IMAGEMAGICK_VERSION}.tar.gz && \
@@ -62,7 +88,7 @@ RUN cd && \
 	cd potrace* && \
 	./configure --prefix=/usr \
                 --disable-static \
-                --docdir=/usr/share/doc/potrace-1.16 \
+                --docdir=/usr/share/doc/potrace \
                 --enable-a4 \
                 --enable-metric \
                 --with-libpotrace && \
