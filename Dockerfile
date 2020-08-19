@@ -1,5 +1,4 @@
-FROM golang:1.5
-
+FROM golang:1.15.0-buster
 # Ignore APT warnings about not having a TTY
 ENV DEBIAN_FRONTEND noninteractive
 
