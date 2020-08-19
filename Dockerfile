@@ -1,4 +1,4 @@
-FROM golang:1.14.5
+FROM golang:1.5
 
 # Ignore APT warnings about not having a TTY
 ENV DEBIAN_FRONTEND noninteractive
@@ -11,7 +11,7 @@ RUN apt-get update && \
 RUN apt-get -q -y install libjpeg-dev libpng-dev libtiff-dev libxml2 libwebp-dev librsvg2-bin zip unzip\
     libgif-dev libx11-dev libltdl-dev libtool-bin ocl-icd-opencl-dev libfreetype6 --no-install-recommends
 
-ENV IMAGEMAGICK_VERSION=7.0.10-23
+ENV IMAGEMAGICK_VERSION=7.0.10-28
 
 ENV POTRACE_VERSION=1.16
 
